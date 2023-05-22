@@ -37,7 +37,7 @@
         </el-form>
       </div>
       <el-table
-        :data="resources"
+        :data="records"
         style="width: 100%; margin-bottom: 20px"
         v-loading="isLoading"
       >
@@ -102,15 +102,15 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { getResourcePages } from '@/services/resource'
-import { getResourceCategories } from '@/services/resource-category'
 import { Form } from 'element-ui'
+import { resourceApi } from '@/services/api'
+import { ResourceListData } from '@/features/resource'
 
 export default Vue.extend({
   name: 'ResourceList',
-  data () {
+  data (): ResourceListData {
     return {
-      resources: [], // 资源列表
+      records: [], // 资源列表
       form: {
         name: '',
         url: '',
@@ -130,17 +130,26 @@ export default Vue.extend({
   },
 
   methods: {
-    async loadResourceCategories () {
-      const { data } = await getResourceCategories()
-      this.resourceCategories = data.data
+    loadResourceCategories () {
+      resourceApi.getResourceCategories().then(rlt => {
+        if (rlt.code === '000000') {
+          this.resourceCategories = rlt.data
+        }
+      })
     },
 
-    async loadResources () {
-      this.isLoading = true // 展示加载中状态
-      const { data } = await getResourcePages(this.form)
-      this.resources = data.data.records
-      this.totalCount = data.data.total
-      this.isLoading = false // 关闭加载中状态
+    loadResources () {
+      /** 展示加载中状态 */
+      this.isLoading = true
+      resourceApi.getResourcePages(this.form).then(rlt => {
+        if (rlt.code === '000000') {
+          this.records = rlt.data.records
+          this.totalCount = rlt.data.total
+        }
+      }).finally(() => {
+        /** 关闭加载中状态 */
+        this.isLoading = false
+      })
     },
 
     onSubmit () {

@@ -52,13 +52,15 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { getAllMenus, deleteMenu } from '@/services/menu'
+import { menuApi } from '@/services/api'
+import { MenuIndexData, MenuItem } from '@/features/menu/models'
 
 export default Vue.extend({
   name: 'MenuIndex',
-  data () {
+  data (): MenuIndexData {
     return {
-      menus: [] // 菜单列表
+      /** 菜单列表 */
+      menus: []
     }
   },
 
@@ -67,11 +69,12 @@ export default Vue.extend({
   },
 
   methods: {
-    async loadAllMenus () {
-      const { data } = await getAllMenus()
-      if (data.code === '000000') {
-        this.menus = data.data
-      }
+    loadAllMenus () {
+      menuApi.getAll().then((rlt) => {
+        if (rlt.code === '000000') {
+          this.menus = rlt.data
+        }
+      })
     },
 
     handleEdit (item: any) {
@@ -83,17 +86,18 @@ export default Vue.extend({
       })
     },
 
-    handleDelete (item: any) {
+    handleDelete (item: MenuItem) {
       this.$confirm('确认删除吗？', '删除提示', {})
-        .then(async () => { // 确认执行这里
+        .then(() => {
           // 请求删除操作
-          const { data } = await deleteMenu(item.id)
-          if (data.code === '000000') {
-            this.$message.success('删除成功')
-            this.loadAllMenus() // 更新数据列表
-          } else {
-            this.$message.error(data.mesg)
-          }
+          menuApi.delete(item.id).then((rlt) => {
+            if (rlt.code === '000000') {
+              this.$message.success('删除成功')
+              this.loadAllMenus() // 更新数据列表
+            } else {
+              this.$message.error(rlt.mesg)
+            }
+          })
         })
         .catch(err => { // 取消执行这里
           console.log(err)

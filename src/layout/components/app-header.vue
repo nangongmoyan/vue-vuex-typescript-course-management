@@ -27,8 +27,8 @@
 </template>
 
 <script lang="ts">
+import { userApi } from '@/services/api'
 import Vue from 'vue'
-import { getUserInfo } from '@/services/user'
 
 export default Vue.extend({
   name: 'AppHeader',
@@ -42,9 +42,9 @@ export default Vue.extend({
   },
   methods: {
     async loadUserInfo () {
-      const { data } = await getUserInfo()
-      this.userInfo = data.content
-      console.log('loadUserInfo')
+      const { content } = await userApi.getInfo()
+      this.userInfo = content
+      // console.log('loadUserInfo')
     },
 
     handleLogout () {

@@ -30,7 +30,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Form } from 'element-ui'
-import { login } from '@/services/user'
+import { authApi } from '@/services/api'
 export default Vue.extend({
   name: 'LoginIndex',
   data () {
@@ -70,16 +70,16 @@ export default Vue.extend({
         // 登录按钮 loading
         this.isLoginLoading = true
         // 2. 验证通过 -> 提交表单
-        const { data } = await login(this.form)
+        const rlt = await authApi.login(this.form)
         // 3.处理请求结果
 
-        if (data.state !== 1) {
+        if (rlt.state !== 1) {
           // 3.1失败：给出提示
-          this.$message.error(data.messagge)
+          this.$message.error(rlt.message)
         } else {
           // 3.2登录成功
           // 记录登录状态，状态需要能够全局访问（放到 Vuex 容器中）
-          this.$store.commit('setUser', data.content)
+          this.$store.commit('setUser', rlt.content)
           // 跳转回原来页面或首页
           this.$router.push((this.$route.query.redirect as string) || '/')
           this.$message.success('登录成功')

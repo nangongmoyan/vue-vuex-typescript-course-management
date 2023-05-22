@@ -50,7 +50,8 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { createOrUpdateMenu, getEditMenuInfo } from '@/services/menu'
+import { menuApi } from '@/services/api'
+import { MenuCreateOrEditData } from '@/features/menu/models'
 
 export default Vue.extend({
   name: 'MenuCreateOrEdit',
@@ -60,7 +61,7 @@ export default Vue.extend({
       default: false
     }
   },
-  data () {
+  data (): MenuCreateOrEditData {
     return {
       form: {
         parentId: -1, // -1 表示没有上级菜单
@@ -80,24 +81,27 @@ export default Vue.extend({
   },
 
   methods: {
-    async loadMenuInfo () {
-      const { data } = await getEditMenuInfo(this.$route.params.id || -1)
-      if (data.data.menuInfo) {
-        this.form = data.data.menuInfo
-      }
-      if (data.code === '000000') {
-        this.parentMenuList = data.data.parentMenuList
-      }
+    loadMenuInfo () {
+      menuApi.getEditMenuInfo(this.$route.params.id || -1).then(rlt => {
+        const { code, data } = rlt
+        if (data.menuInfo) {
+          this.form = data.menuInfo
+        }
+        if (code === '000000') {
+          this.parentMenuList = data.parentMenuList
+        }
+      })
     },
 
     async onSubmit () {
       // 1. 表单验证
       // 2. 验证通过，提交表单
-      const { data } = await createOrUpdateMenu(this.form)
-      if (data.code === '000000') {
-        this.$message.success('提交成功')
-        this.$router.back()
-      }
+      menuApi.saveOrUpdate(this.form).then(rlt => {
+        if (rlt.code === '000000') {
+          this.$message.success('提交成功')
+          this.$router.back()
+        }
+      })
     }
   }
 })
