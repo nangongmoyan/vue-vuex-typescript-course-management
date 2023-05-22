@@ -1,6 +1,6 @@
 import { clientRequest } from '@/services/request'
 import { GetRoleOrResourceResponse } from '../common'
-import { GetRoleByIdResponse } from './type'
+import { GetRolesResponse, GetRoleByIdResponse } from './type'
 
 export const roleApi = {
   /**
@@ -34,5 +34,29 @@ export const roleApi = {
    */
   getRoleById: function (id: string | number):Promise<GetRoleByIdResponse> {
     return clientRequest.get(`/boss/role/${id}`)
+  },
+
+  /**
+   *
+   * @returns
+   */
+  getAllRoles: function ():Promise<GetRolesResponse> {
+    return clientRequest.get('/boss/role/all')
+  },
+  /**
+   *
+   * @param data
+   * @returns
+   */
+  allocateUserRoles: function (data:any):Promise<any> {
+    return clientRequest.post('/boss/role/allocateUserRoles', data)
+  },
+  /**
+   *
+   * @param userId
+   * @returns
+   */
+  getUserRoles: function (userId: string | number):Promise<GetRolesResponse> {
+    return clientRequest.get(`/boss/role/user/${userId}`)
   }
 }
