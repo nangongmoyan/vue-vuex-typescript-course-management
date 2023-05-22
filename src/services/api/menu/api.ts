@@ -2,7 +2,7 @@
 import { MenuForm } from '@/features/menu'
 import { clientRequest } from '../../request'
 import { ResopnseTwo } from '../..//ResponseType'
-import { GetEditMenuInfoResponse, MenuResponse, SaveOrUpdateResponse } from './type'
+import { GetEditMenuInfoResponse, GetRoleMenusResponse, MenuResponse, SaveOrUpdateResponse } from './type'
 
 export const menuApi = {
 /**
@@ -40,5 +40,31 @@ export const menuApi = {
  */
   delete: function (id: number):Promise<ResopnseTwo> {
     return clientRequest.delete(`/boss/menu/${id}`)
+  },
+
+  /**
+   *
+   * @returns
+   */
+  getMenuNodeList: function ():Promise<any> {
+    return clientRequest.get('/boss/menu/getMenuNodeList')
+  },
+
+  /**
+   *
+   * @param data
+   * @returns
+   */
+  allocateRoleMenus: function (data:any):Promise<any> {
+    return clientRequest.post('/boss/menu/allocateRoleMenus', data)
+  },
+
+  /**
+   *
+   * @param roleId
+   * @returns
+   */
+  getRoleMenus: function (roleId:string|number):Promise<GetRoleMenusResponse> {
+    return clientRequest.get('/boss/menu/getRoleMenus', { params: { roleId } })
   }
 }
