@@ -125,7 +125,7 @@ import Vue from 'vue'
 
 import { Form } from 'element-ui'
 import { courseApi } from '@/services/api'
-import { CourseItem, CourseListData, CourseStatus } from '@/features/course'
+import { CourseOneItem, CourseListData, CourseOneStatus } from '@/features/course'
 
 export default Vue.extend({
   name: 'CourseList',
@@ -135,7 +135,7 @@ export default Vue.extend({
         currentPage: 1,
         pageSize: 10,
         courseName: '',
-        status: CourseStatus.Shelves
+        status: CourseOneStatus.Shelves
       },
       courses: [],
       totalCount: 0,
@@ -177,7 +177,7 @@ export default Vue.extend({
       this.loadCourses()
     },
 
-    async onStateChange (course: CourseItem) {
+    async onStateChange (course: CourseOneItem) {
       course.isStatusLoading = true
       courseApi.changeState({
         courseId: course.id,
