@@ -95,6 +95,7 @@ clientRequest.interceptors.response.use(
               return clientRequest(error.config)
             })
             .catch((err) => {
+              console.log('11111')
               console.log(err)
               store.commit('setUser', null)
               redirectLogin()
