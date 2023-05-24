@@ -31,6 +31,6 @@ export const userApi = {
    * @returns
    */
   getUserPermissions: function ():Promise<GetUserPermissionsResponse> {
-    return clientRequest.get('/boss/permission/getUserPermissions')
+    return clientRequest.get(`${config.boss}/boss/permission/getUserPermissions`)
   }
 }
