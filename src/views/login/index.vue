@@ -1,30 +1,45 @@
 <template>
-  <div class="login">
-    <el-form
-      class="login-form"
-      label-position="top"
-      ref="form"
-      :model="form"
-      :rules="rules"
-      label-width="80px"
-    >
-      <el-form-item label="手机号" prop="phone">
-        <el-input v-model="form.phone"></el-input>
-      </el-form-item>
-      <el-form-item label="密码" prop="password">
-        <el-input type="password" v-model="form.password"></el-input>
-      </el-form-item>
-      <el-form-item>
-        <el-button
-          class="login-btn"
-          type="primary"
-          :loading="isLoginLoading"
-          @click="onSubmit"
-          >登录</el-button
-        >
-      </el-form-item>
-    </el-form>
-  </div>
+
+    <div class="login">
+      <el-form
+        class="login-form"
+        label-position="top"
+        ref="form"
+        :model="form"
+        :rules="rules"
+        label-width="80px"
+      >
+        <el-container>
+          <el-aside width="100px ">
+            <el-image
+            style="width: 100px; height: 100px"
+            :src="require('@/assets/nangongmoyan-com.png')"
+            />
+          </el-aside>
+          <el-container>
+            <el-header>Education Boss</el-header>
+            <el-main>管理系统</el-main>
+          </el-container>
+        </el-container>
+
+        <el-form-item label="手机号" prop="phone">
+          <el-input v-model="form.phone"></el-input>
+        </el-form-item>
+        <el-form-item label="密码" prop="password">
+          <el-input type="password" v-model="form.password"></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-button
+            class="login-btn"
+            type="primary"
+            :loading="isLoginLoading"
+            @click="onSubmit"
+            >登录</el-button
+          >
+        </el-form-item>
+      </el-form>
+    </div>
+
 </template>
 
 <script lang="ts">
@@ -93,6 +108,15 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
+
+  .el-header , .el-main{
+    line-height: 50px;
+    text-align: center;
+    padding: 0;
+    // background-color: #F1F;
+    font-size: 25px;
+  }
+
 .login {
   height: 100vh;
   display: flex;
@@ -103,6 +127,9 @@ export default Vue.extend({
     background: #fff;
     padding: 20px;
     border-radius: 5px;
+  }
+  .login-btn {
+    width: 100%;
   }
 }
 </style>

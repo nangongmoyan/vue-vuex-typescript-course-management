@@ -99,7 +99,7 @@ clientRequest.interceptors.response.use(
             })
             .catch((err) => {
               console.log('11111')
-              console.log(err)
+              console.log({ err })
               store.commit('setUser', null)
               redirectLogin()
               return Promise.reject(error)
