@@ -30,7 +30,7 @@ router.beforeEach(async (to, from, next) => {
     }
     // 如果登录了，校验访问权限
     // 1. 获取用户权限列表
-    const { menuList } = await store.dispatch('getUserPermissons')
+    const { menuList = [] } = await store.dispatch('getUserPermissons')
 
     // 2. 判断当前访问的路由是否存在于权限列表中
     for (let i = 0; i < menuList.length; i++) {
