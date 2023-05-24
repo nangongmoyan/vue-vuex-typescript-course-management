@@ -1,7 +1,8 @@
 
-import { MenuForm } from '@/features/menu'
+import { config } from '../../config'
 import { clientRequest } from '../../request'
 import { ResopnseTwo } from '../..//ResponseType'
+import { MenuForm } from '../../../features/menu'
 import { GetEditMenuInfoResponse, GetRoleMenusResponse, MenuResponse, SaveOrUpdateResponse } from './type'
 
 export const menuApi = {
@@ -11,7 +12,7 @@ export const menuApi = {
  * @returns
  */
   saveOrUpdate: function (data: MenuForm) :Promise<SaveOrUpdateResponse> {
-    return clientRequest.post('/boss/menu/saveOrUpdate', data)
+    return clientRequest.post(`${config.boss}/boss/menu/saveOrUpdate`, data)
   },
 
   /**
@@ -19,7 +20,7 @@ export const menuApi = {
  * @returns
  */
   getAll: function ():Promise<MenuResponse> {
-    return clientRequest.get('/boss/menu/getAll')
+    return clientRequest.get(`${config.boss}/boss/menu/getAll`)
   },
 
   /**
@@ -28,7 +29,7 @@ export const menuApi = {
    * @returns
    */
   getEditMenuInfo: function (id: string | number = -1):Promise<GetEditMenuInfoResponse> {
-    return clientRequest.get('/boss/menu/getEditMenuInfo', {
+    return clientRequest.get(`${config.boss}/boss/menu/getEditMenuInfo`, {
       params: { id }
     })
   },
@@ -39,7 +40,7 @@ export const menuApi = {
  * @returns
  */
   delete: function (id: number):Promise<ResopnseTwo> {
-    return clientRequest.delete(`/boss/menu/${id}`)
+    return clientRequest.delete(`${config.boss}/boss/menu/${id}`)
   },
 
   /**
@@ -47,7 +48,7 @@ export const menuApi = {
    * @returns
    */
   getMenuNodeList: function ():Promise<any> {
-    return clientRequest.get('/boss/menu/getMenuNodeList')
+    return clientRequest.get(`${config.boss}/boss/menu/getMenuNodeList`)
   },
 
   /**
@@ -55,8 +56,8 @@ export const menuApi = {
    * @param data
    * @returns
    */
-  allocateRoleMenus: function (data:any):Promise<any> {
-    return clientRequest.post('/boss/menu/allocateRoleMenus', data)
+  allocateRoleMenus: function (data:any) {
+    return clientRequest.post(`${config.boss}/boss/menu/allocateRoleMenus`, data)
   },
 
   /**
@@ -65,6 +66,6 @@ export const menuApi = {
    * @returns
    */
   getRoleMenus: function (roleId:string|number):Promise<GetRoleMenusResponse> {
-    return clientRequest.get('/boss/menu/getRoleMenus', { params: { roleId } })
+    return clientRequest.get(`${config.boss}/boss/menu/getRoleMenus`, { params: { roleId } })
   }
 }

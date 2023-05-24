@@ -1,7 +1,8 @@
+import { config } from '../../config'
+import { AxiosProgressEvent } from 'axios'
 import { clientRequest } from '../../request'
 import { CourseOneStatus } from '@/features/course'
 import { GetCourseByIdResponse, GetQueryCoursesResponse, UploadCourseImageResponse } from './type'
-import { AxiosProgressEvent } from 'axios'
 
 export const courseApi = {
   /**
@@ -10,7 +11,7 @@ export const courseApi = {
    * @returns
    */
   getQueryCourses: function (data:any):Promise<GetQueryCoursesResponse> {
-    return clientRequest.post('/boss/course/getQueryCourses', data)
+    return clientRequest.post(`${config.boss}/boss/course/getQueryCourses`, data)
   },
   /**
    *
@@ -18,7 +19,7 @@ export const courseApi = {
    * @returns
    */
   changeState: function (params:{courseId:number, status:CourseOneStatus}):Promise<any> {
-    return clientRequest.get('/boss/course/changeState', { params })
+    return clientRequest.get(`${config.boss}/boss/course/changeState`, { params })
   },
 
   /**
@@ -27,7 +28,7 @@ export const courseApi = {
    * @returns
    */
   saveOrUpdateCourse: function (data:any):Promise<any> {
-    return clientRequest.post('/boss/course/saveOrUpdateCourse', data)
+    return clientRequest.post(`${config.boss}/boss/course/saveOrUpdateCourse`, data)
   },
 
   /**
@@ -37,7 +38,7 @@ export const courseApi = {
    * @returns
    */
   uploadCourseImage: function (data:FormData, onUploadProgress?: (progressEvent: AxiosProgressEvent) => void):Promise<UploadCourseImageResponse> {
-    return clientRequest.post('/boss/course/upload', data, { onUploadProgress })
+    return clientRequest.post(`${config.boss}/boss/course/upload`, data, { onUploadProgress })
   },
   /**
    *
@@ -45,6 +46,6 @@ export const courseApi = {
    * @returns
    */
   getCourseById: function (courseId: string | number):Promise<GetCourseByIdResponse> {
-    return clientRequest.get('/boss/course/getCourseById', { params: { courseId } })
+    return clientRequest.get(`${config.boss}/boss/course/getCourseById`, { params: { courseId } })
   }
 }

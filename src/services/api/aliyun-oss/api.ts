@@ -1,3 +1,4 @@
+import { config } from '../../config'
 import { clientRequest } from '../../request'
 
 export const aliyunOss = {
@@ -6,7 +7,7 @@ export const aliyunOss = {
    * @returns
    */
   aliyunImagUploadAddressAdnAuth: function () {
-    return clientRequest.get('/boss/course/upload/aliyunImagUploadAddressAdnAuth.json')
+    return clientRequest.get(`${config.boss}/boss/course/upload/aliyunImagUploadAddressAdnAuth.json`)
   },
   /**
    *
@@ -14,7 +15,7 @@ export const aliyunOss = {
    * @returns
    */
   aliyunVideoUploadAddressAdnAuth: function (params:any) {
-    return clientRequest.get('/boss/course/upload/aliyunVideoUploadAddressAdnAuth.json', { params })
+    return clientRequest.get(`${config.boss}/boss/course/upload/aliyunVideoUploadAddressAdnAuth.json`, { params })
   },
   /**
    *
@@ -22,7 +23,7 @@ export const aliyunOss = {
    * @returns
    */
   transCodeVideo: function (data:any) {
-    return clientRequest.post('/boss/course/upload/aliyunTransCode.json', data)
+    return clientRequest.post(`${config.boss}/boss/course/upload/aliyunTransCode.json`, data)
   },
   /**
    *
@@ -30,6 +31,6 @@ export const aliyunOss = {
    * @returns
    */
   getAliyunTransCodePercent: function (lessonId: string| number) {
-    return clientRequest('/boss/course/upload/aliyunTransCodePercent.json', { params: { lessonId } })
+    return clientRequest(`${config.boss}/boss/course/upload/aliyunTransCodePercent.json`, { params: { lessonId } })
   }
 }

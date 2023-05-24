@@ -1,6 +1,6 @@
-import { GetInfoResponse, GetUserPagesResponse } from './type'
-import { clientRequest } from '../../request'
 import { config } from '../../config'
+import { clientRequest } from '../../request'
+import { GetInfoResponse, GetUserPagesResponse } from './type'
 
 export const userApi = {
   /**
@@ -16,7 +16,7 @@ export const userApi = {
    * @returns
    */
   getUserPages: function (data:any):Promise<GetUserPagesResponse> {
-    return clientRequest.post('/boss/user/getUserPages', data)
+    return clientRequest.post(`${config.boss}/boss/user/getUserPages`, data)
   },
   /**
    *
@@ -24,6 +24,6 @@ export const userApi = {
    * @returns
    */
   forbidUser: function (userId:string| number):Promise<any> {
-    return clientRequest.post('/boss/user/forbidUser', { params: { userId } })
+    return clientRequest.post(`${config.boss}/boss/user/forbidUser`, { params: { userId } })
   }
 }

@@ -1,8 +1,10 @@
+
+import qs from 'qs'
 import axios from 'axios'
 import store from '@/store'
-import { Message } from 'element-ui'
 import router from '@/router'
-import qs from 'qs'
+import { config } from './config'
+import { Message } from 'element-ui'
 
 const clientRequest = axios.create({
   // 配置选项
@@ -22,6 +24,7 @@ function redirectLogin () {
 function refreshToken () {
   return axios.create()({
     method: 'POST',
+    baseURL: config.front,
     url: '/front/user/refresh_token',
     data: qs.stringify({
       // refresh_token 只能使用1次
