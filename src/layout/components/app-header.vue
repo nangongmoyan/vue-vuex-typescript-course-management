@@ -1,11 +1,6 @@
 <template>
   <div class="header">
-    <el-breadcrumb separator-class="el-icon-arrow-right">
-      <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-      <el-breadcrumb-item>活动管理</el-breadcrumb-item>
-      <el-breadcrumb-item>活动列表</el-breadcrumb-item>
-      <el-breadcrumb-item>活动详情</el-breadcrumb-item>
-    </el-breadcrumb>
+  <bread-crumb/>
     <el-dropdown>
       <span class="el-dropdown-link">
         <el-avatar
@@ -29,9 +24,12 @@
 <script lang="ts">
 import { userApi } from '@/services/api'
 import Vue from 'vue'
-
+import BreadCrumb from '@/components/BreadCrumb/index.vue'
 export default Vue.extend({
   name: 'AppHeader',
+  components: {
+    BreadCrumb
+  },
   data () {
     return {
       userInfo: {} // 当前登录用户信息
