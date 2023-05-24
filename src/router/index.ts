@@ -18,15 +18,9 @@ router.beforeEach(async (to, from, next) => {
       return next({
         name: 'login',
         query: {
-          redirect: to.fullPath === '/' ? 'Role' : to.fullPath
+          redirect: to.fullPath === '/' ? '/Role' : to.fullPath
         }
       })
-      // return to.fullPath === '/' ? next({ name: 'login' }) : next({
-      //   name: 'login',
-      //   query: { // 通过 url 传递查询字符串参数
-      //     redirect: to.fullPath // 把登录成功需要返回的页面告诉登录页面
-      //   }
-      // })
     }
     // 如果登录了，校验访问权限
     // 1. 获取用户权限列表
