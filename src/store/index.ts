@@ -31,8 +31,8 @@ export default new Vuex.Store({
   actions: {
     async getUserPermissons ({ commit }) {
       const { content } = await userApi.getUserPermissions()
-      commit('SET_MENU_LIST', content.menuList)
-      commit('SET_RESOURCE_LIST', content.resourceList)
+      commit('SET_MENU_LIST', content?.menuList ?? [])
+      commit('SET_RESOURCE_LIST', content?.resourceList ?? [])
       return content
     }
   },
