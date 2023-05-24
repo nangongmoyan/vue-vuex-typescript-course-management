@@ -24,3 +24,10 @@ export interface RoleOrResource {
   searchCount: boolean;
   pages: number;
 }
+
+export enum Icon {
+  Film = 'film',
+  Lock = 'lock',
+  Setting = 'setting',
+  User = 'user',
+}

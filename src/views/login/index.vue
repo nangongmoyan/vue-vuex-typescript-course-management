@@ -96,7 +96,9 @@ export default Vue.extend({
           // 记录登录状态，状态需要能够全局访问（放到 Vuex 容器中）
           this.$store.commit('setUser', rlt.content)
           // 跳转回原来页面或首页
-          this.$router.push((this.$route.query.redirect as string) || '/')
+          this.$router.push((this.$route.query.redirect as string) || '/').catch(err => {
+            console.log({ err })
+          })
           this.$message.success('登录成功')
         }
       } catch (error) {}

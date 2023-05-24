@@ -86,6 +86,7 @@ clientRequest.interceptors.response.use(
           return refreshToken()
             .then((res) => {
               if (!res.data.success) {
+                redirectLogin()
                 throw new Error('刷新 Token 失败')
               }
 

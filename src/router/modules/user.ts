@@ -7,10 +7,13 @@ const userRoutes: RouteConfig = {
   meta: { requiresAuth: true, title: '用户管理' },
   children: [
     {
-      path: '/user',
+      path: '/Users',
       name: 'user',
       component: () =>
-        import(/* webpackChunkName: 'user' */ '@/views/user/index.vue')
+        import(/* webpackChunkName: 'user' */ '@/views/user/index.vue'),
+      meta: {
+        menuId: 'Users'
+      }
     }
   ]
 }

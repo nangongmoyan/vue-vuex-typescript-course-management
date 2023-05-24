@@ -1,3 +1,4 @@
+import { Icon } from '../../common'
 
 export interface MenuItem {
   id: number;
@@ -35,13 +36,6 @@ export interface EditMenuInfo {
 export interface MenuCreateOrEditData {
   form: MenuForm
   parentMenuList: MenuListItem[]
-}
-
-export enum Icon {
-  Film = 'film',
-  Lock = 'lock',
-  Setting = 'setting',
-  User = 'user',
 }
 
 export interface RoleMenuItem {

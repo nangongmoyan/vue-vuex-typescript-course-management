@@ -1,6 +1,6 @@
 import { config } from '../../config'
 import { clientRequest } from '../../request'
-import { GetInfoResponse, GetUserPagesResponse } from './type'
+import { GetInfoResponse, GetUserPagesResponse, GetUserPermissionsResponse } from './type'
 
 export const userApi = {
   /**
@@ -25,5 +25,12 @@ export const userApi = {
    */
   forbidUser: function (userId:string| number):Promise<any> {
     return clientRequest.post(`${config.boss}/boss/user/forbidUser`, { params: { userId } })
+  },
+  /**
+   *
+   * @returns
+   */
+  getUserPermissions: function ():Promise<GetUserPermissionsResponse> {
+    return clientRequest.get('/boss/permission/getUserPermissions')
   }
 }

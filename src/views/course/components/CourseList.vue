@@ -41,9 +41,9 @@
           style="float: right; margin-top: -5px"
           type="primary"
           @click="$router.push({
-            name: 'course-create'
+            name: 'new-courses'
           })"
-        >添加课程</el-button>
+        >新增课程</el-button>
       </div>
       <el-table
         :data="courses"
@@ -92,12 +92,12 @@
           <template slot-scope="scope">
             <el-button
               @click="$router.push({
-                name: 'course-edit',
+                name: 'edit-course',
                 params: {
                   courseId: scope.row.id
                 }
               })"
-            >编辑</el-button>
+            >更新课程</el-button>
             <el-button
               @click="$router.push({
                 name: 'course-section',

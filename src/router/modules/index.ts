@@ -35,6 +35,11 @@ const routes: Array<RouteConfig> = [
     name: '404',
     component: () =>
       import(/* webpackChunkName: '404' */ '@/views/error-page/404.vue')
+  },
+  {
+    path: '/not-permission',
+    name: 'not-permission',
+    component: () => import('@/views/error-page/403.vue')
   }
 ]
 
