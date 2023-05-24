@@ -30,26 +30,28 @@ router.beforeEach(async (to, from, next) => {
     }
     // 如果登录了，校验访问权限
     // 1. 获取用户权限列表
-    const { menuList = [] } = await store.dispatch('getUserPermissons')
+    const permission = await store.dispatch('getUserPermissons')
 
+    console.log({ permission })
     // 2. 判断当前访问的路由是否存在于权限列表中
-    for (let i = 0; i < menuList.length; i++) {
-      const menu = menuList[i]
-      // 有权限，允许通过
-      if (menu.href === to.meta?.menuId) {
-        return next()
-      }
-      if (menu.subMenuList) {
-        for (let j = 0; j < menu.subMenuList.length; j++) {
-          const subMenu = menu.subMenuList[j]
-          // 有权限，允许通过
-          if (subMenu.href === to.meta?.menuId) {
-            return next()
-          }
-        }
-      }
-    }
+    // for (let i = 0; i < menuList.length; i++) {
+    //   const menu = menuList[i]
+    //   // 有权限，允许通过
+    //   if (menu.href === to.meta?.menuId) {
+    //     return next()
+    //   }
+    //   if (menu.subMenuList) {
+    //     for (let j = 0; j < menu.subMenuList.length; j++) {
+    //       const subMenu = menu.subMenuList[j]
+    //       // 有权限，允许通过
+    //       if (subMenu.href === to.meta?.menuId) {
+    //         return next()
+    //       }
+    //     }
+    //   }
+    // }
 
+    return next()
     // 代码执行到这里，以为上上面没有 return next()
     // 那这里就要让用户到 403 页面了
     return next('/not-permission')
