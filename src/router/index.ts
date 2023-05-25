@@ -44,6 +44,7 @@ router.beforeEach(async (to, from, next) => {
       }
     }
 
+    if (to.fullPath === '/') return next('/Role')
     // 代码执行到这里，以为上上面没有 return next()
     // 那这里就要让用户到 403 页面了
     return next('/not-permission')
